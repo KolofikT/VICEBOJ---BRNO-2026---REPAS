@@ -48,7 +48,7 @@ bool cervena(){
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Assuming sensor 2 is for left
-bool is_free_right()    { return rkUltraMeasure(4) > 200; }
+bool is_free_right()    { return rkUltraMeasure(2) > 200; }
 
 bool is_free_front()    { return rkUltraMeasure(1) > 200; }
 
@@ -56,7 +56,7 @@ void srovnani(){
     back_buttons(40);
     forward_acc(od_steny_na_stred_pole, 50);
     delay(100);
-    turn_on_spot_right(90, 50);
+    turn_on_spot_left(90, 50);
     delay(100);
     back_buttons(40);
     delay(100);
@@ -102,67 +102,96 @@ void sprint_m_d(){
 }
 
 void slalom(bool right){
-    forward_acc(300,60);
-    turn_on_spot_right(90, 50);
-    forward_acc(150,60);
+    forward_acc(od_steny_na_stred_pole, 60);
+    radius_right(150, 90, 50);
+    delay(100);
+    radius_left(150, 180, 50);
+    delay(100);
+    radius_right(150, 180, 50);
+    delay(100);
 
-    //Jizda bez sledovaní cary
-    radius_left(180, 90, 50); 
-    radius_right(184, 90, 50);
+    //Srovnani pred vjetim do cile
     back_buttons(30);
-
-    forward_acc(84, 30);
+    delay(100);
+    forward_acc(od_steny_na_stred_pole, 60);
+    delay(100);
     turn_on_spot_right(90, 50);
+    delay(100);
     back_buttons(30);
-
-    forward_acc(84, 30);
-    turn_on_spot_left(90, 50);
-    forward_acc(300, 50);
-
-    rkMotorsSetSpeed(0, 0);
     delay(100);
-    back_buttons(40);
+    forward_acc(od_steny_na_stred_pole, 60);
     delay(100);
-    forward_acc(od_steny_na_stred_pole , 50);
-    turn_on_spot_right(90, 50);
-    delay(100);
-    back_buttons(40);
-    delay(100);
-    forward_acc(od_steny_na_stred_pole , 50);
     turn_on_spot_left(90, 50);
     delay(100);
-    forward_acc(jedno_pole, 50);
+    back_buttons(30);
     delay(100);
-    //srovnej_se_v_levo();
+    forward_acc(jedno_pole + od_steny_na_stred_pole, 60);
     delay(100);
+
+
+    // forward_acc(300,60);
+    // turn_on_spot_right(90, 50);
+    // //forward_acc(150,60);
+
+    // //Jizda bez sledovaní cary
+    // radius_left(180, 90, 50); 
+    // radius_right(184, 90, 50);
+    // back_buttons(30);
+
+    // forward_acc(84, 30);
+    // turn_on_spot_right(90, 50);
+    // back_buttons(30);
+
+    // forward_acc(84, 30);
+    // turn_on_spot_left(90, 50);
+    // forward_acc(300, 50);
+
+    // rkMotorsSetSpeed(0, 0);
+    // delay(100);
+    // back_buttons(40);
+    // delay(100);
+    // forward_acc(od_steny_na_stred_pole , 50);
+    // turn_on_spot_right(90, 50);
+    // delay(100);
+    // back_buttons(40);
+    // delay(100);
+    // forward_acc(od_steny_na_stred_pole , 50);
+    // turn_on_spot_left(90, 50);
+    // delay(100);
+    // forward_acc(jedno_pole, 50);
+    // delay(100);
+    // //srovnej_se_v_levo();
+    // delay(100);
     
 }
 void medved(){
     otevrit_klepeto();
     delay(100);
-    forward(420,70);
+    forward(430,60);
     delay(100);
-    radius_right(70, 90, 50);
+    radius_right(90, 90, 40);
     delay(100);
     forward(jedno_pole,70);
     delay(10);
-    back_buttons(od_steny_na_stred_pole);
+    back_buttons(30);
     delay(10);
     zavrit_klepeto();
     delay(10);
-    forward_acc(od_steny_na_stred_pole, 50);
+    forward_acc(od_steny_na_stred_pole, 70);
     delay(100);
-    turn_on_spot_right(90,50);
+    turn_on_spot_right(90, 50);
     delay(10);
     back_buttons(30);
     delay(10);
     forward_acc(jedno_pole + od_steny_na_stred_pole, 70); // 345
     delay(10);
-    turn_on_spot_left(90,50);
+    turn_on_spot_left(90, 50);
+    back_buttons(30);
     delay(10);
-    forward_acc(jedno_pole,70);
+    forward_acc(jedno_pole + od_steny_na_stred_pole, 70);
     delay(10);
 }
+
 void kulicky(){
     int cekani = 1500;
     forward_acc(30,30);
@@ -185,6 +214,7 @@ void kulicky(){
     forward_acc(od_steny_na_stred_pole + jedno_pole, 50);
 
 }
+
 void bludiste(){
 
     forward_acc(jedno_pole,40);
@@ -206,7 +236,11 @@ void bludiste(){
                 turn_on_spot_right(90, 50); 
             }
             else{
+                rkLedBlue(true);
                 srovnani();
+                // rkLedAll(true);
+                // turn_on_spot_left(90, 50);
+                // forward_acc(jedno_pole,40);
             }
         }
         delay(100);
@@ -234,6 +268,8 @@ void bludiste(){
             }
             else{
                 srovnani();
+                // rkLedAll(true);
+                // turn_on_spot_left(90, 50);
             }
         }
         delay(100);

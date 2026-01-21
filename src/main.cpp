@@ -60,6 +60,8 @@ void configurating(){
     test_batery();
     
     zavrit_klepeto();
+    zasun_zhazovadlo();
+
 }   
 
 enum RobotButton {
@@ -127,7 +129,7 @@ void loop() {
 
         case OFF_MEDVED:
             rkLedRed(true); // Červená pro medvěda
-            delay(10000);
+            delay(1000);
             medved();
             break;
 
