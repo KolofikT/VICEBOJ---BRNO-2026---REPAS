@@ -64,8 +64,8 @@ struct rkConfig {
         , konstanta_radius_vnitrni_kolo(0.98f) // Korekční faktor pro vnitřní kolo při zatáčení
         , korekce_nedotacivosti_left(1.03f)// Korekce nedotáčivosti při otaceni na miste do leva
         , korekce_nedotacivosti_right(1.03f)// Korekce nedotáčivosti při otaceni na miste do prava
-        , Button1(35)
-        , Button2(27)
+        , Button1(27)
+        , Button2(35)
         , motor_id_left(4)
         , motor_id_right(1)
         , motor_max_power_pct(100)
