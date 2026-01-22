@@ -66,6 +66,9 @@ void srovnani(){
 
 void sprint_m_d(){
 
+    //Změření vzdálenosti k pravé stěně před jízdou
+    int first_distance_right = rkUltraMeasure(2);
+
     // Nastavení P-regulátoru a rychlosti
     const int base_speed = 60; // Základní rychlost
     const float Kp = 0.5;      // Proporční konstanta (laditelná hodnota)
@@ -81,6 +84,37 @@ void sprint_m_d(){
 
         // Malá pauza pro plynulost
         delay(20);
+
+        //Měření vzdálenosti k pravé stěně během jízdy
+        int current_distance_right = rkUltraMeasure(2);
+
+        if(current_distance_right < 200 && current_distance_right> 10 && (current_distance_right - first_distance_right < 0)){
+
+            // Výpočet chyby
+            int error_right = current_distance_right - first_distance_right;
+
+            // Výpočet korekce
+            int correction = Kp * error_right;
+
+            // Úprava rychlosti motorů
+            rychlost_levy_motor = base_speed + correction;
+            rychlost_pravy_motor = base_speed - correction;
+        }
+        else if(current_distance_right < 200 && current_distance_right> 10 && (current_distance_right - first_distance_right > 0)){
+            // Výpočet chyby
+            int error_left = abs(current_distance_right - first_distance_right);
+
+            // Výpočet korekce
+            int correction = Kp * error_left;
+
+            // Úprava rychlosti motorů
+            rychlost_levy_motor = base_speed - correction;
+            rychlost_pravy_motor = base_speed + correction;
+        }
+        else{
+            rychlost_levy_motor = base_speed;
+            rychlost_pravy_motor = base_speed;
+        }
     }
 
     // Po skončení smyčky zastavíme

@@ -7,7 +7,7 @@
 byte Bbutton1 = 27;
 byte Bbutton2 = 35;
  
-
+int DelayOnRed = 1000;
 
 // deklarace instance senzoru
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
@@ -49,7 +49,6 @@ void configurating(){
     // //Inicializuj senzor
     // rk_laser_init("laser", Wire1, lox, 0, 0x30);
 
-    
     printf("Starting main loop\n");
     //start tlacitko pro kalibraci klepet
 
@@ -89,7 +88,6 @@ RobotButton getPressed() {
 }
 
 
-
 void setup() {
     configurating();
 }
@@ -100,20 +98,18 @@ void loop() {
     rkLedYellow(false);
     rkLedRed(false);
 
-    Serial.print("ooooo");
-
     switch(getPressed()) {
         case UP_VYHREJ:
             rkLedGreen(true); // Zelená pro výhru
-            // delay(10000);
+            // delay(DelayOnRed);
             // // Kombinace úkolů pro "vyhrej"
             // sprint_m_d(); 
             // rkBuzzerSet(true);
             // delay(200);
             // rkBuzzerSet(false);
-            // delay(10000);
+            // delay(DelayOnRed);
             // slalom(true); 
-            // delay(10000);
+            // delay(DelayOnRed);
             // bludiste();
             // srovnej_se_v_pravo();
             // turn_on_spot_left(90, 50);
@@ -121,34 +117,34 @@ void loop() {
             // back_buttons(40);
             // delay(100);
             // forward_acc(od_steny_na_stred_pole, 50);
-            // delay(10000);
+            // delay(DelayOnRed);
             // medved();
-            // delay(10000);
+            // delay(DelayOnRed));
             // kulicky();
             break;
 
         case OFF_MEDVED:
             rkLedRed(true); // Červená pro medvěda
-            delay(1000);
+            delay(DelayOnRed);
             medved();
             break;
 
         case DOWN_KULICKY:
             rkLedBlue(true); // Modrá pro kuličky
-            delay(1000);
+            delay(DelayOnRed);
             kulicky();
             break;
             
         case RIGHT_BLUDISTE:
             rkLedYellow(true); // Žlutá pro bludiště
-            delay(1000);
+            delay(DelayOnRed);
             bludiste();
             break;
             
         case LEFT_SLALOM:
             rkLedRed(true);
             rkLedYellow(true); // Oranžová pro slalom
-            delay(1000);
+            delay(DelayOnRed);
             slalom(true);
             
             break;
@@ -156,7 +152,7 @@ void loop() {
         case ON_SPRINT:
             rkLedBlue(true);
             rkLedRed(true); // Fialová pro sprint
-            delay(1000);
+            delay(DelayOnRed);
             sprint_m_d();        
 
             break;
@@ -164,22 +160,19 @@ void loop() {
         case BUTTON1_KOMBINACE1:
             rkLedGreen(true);
             rkLedYellow(true); // Zeleno-žlutá pro kombinaci 1
-            delay(1000);
-            Serial.print("ssssssssssss");
+            delay(DelayOnRed);
 
             
             break;
             
         case BUTTON2_KOMBINACE2:
-            Serial.print("fffffffffff");
             rkLedRed(true);
             rkLedGreen(true);
             rkLedBlue(true);
             rkLedYellow(true); // Bílá (všechny barvy) pro kombinaci 2
-            delay(1000);
-            rkServosSetPosition(3, 90);
-            //forward_acc(od_steny_na_stred_pole, 50);
-            delay(100);
+            delay(DelayOnRed);
+
+            
             break;
         
         case NONE:
