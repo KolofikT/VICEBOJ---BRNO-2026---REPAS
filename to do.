@@ -4,10 +4,12 @@ VÍCEBOJ - BRNO 2026 -> REPAS Z ,,BRNO 2025,,
 
 SOUTĚŽE:        STAV:
 
-Sprint      - CHECKING
-Slalom      - CHECKING      - Koncept done
+Sprint      - DONE
+Slalom      - DONE   - OBA SMĚRY
 Bludiště    - DONE 
 Medvěd      - DONE
 Kuličky     - WAITING
 
 Návaznost:
+
+SPRINT --> SLALOM --> BLUDIŠTĚ  -   DONE

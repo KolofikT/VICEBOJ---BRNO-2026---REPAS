@@ -99,83 +99,186 @@ void loop() {
     rkLedRed(false);
 
     switch(getPressed()) {
-        case UP_VYHREJ:
-            rkLedGreen(true); // Zelená pro výhru
-            // delay(DelayOnRed);
-            // // Kombinace úkolů pro "vyhrej"
-            // sprint_m_d(); 
-            // rkBuzzerSet(true);
-            // delay(200);
-            // rkBuzzerSet(false);
-            // delay(DelayOnRed);
-            // slalom(true); 
-            // delay(DelayOnRed);
-            // bludiste();
-            // srovnej_se_v_pravo();
-            // turn_on_spot_left(90, 50);
-            // delay(100);
-            // back_buttons(40);
-            // delay(100);
-            // forward_acc(od_steny_na_stred_pole, 50);
-            // delay(DelayOnRed);
-            // medved();
-            // delay(DelayOnRed));
-            // kulicky();
-            break;
+        case UP_VYHREJ:     //Provede VŠECHNY DISCIPLÍNY
 
-        case OFF_MEDVED:
-            rkLedRed(true); // Červená pro medvěda
-            delay(DelayOnRed);
-            medved();
-            break;
+                // Zelená pro Všechny disciplíny
+                rkLedGreen(true); 
+                delay(DelayOnRed);
 
-        case DOWN_KULICKY:
-            rkLedBlue(true); // Modrá pro kuličky
-            delay(DelayOnRed);
-            kulicky();
-            break;
+        // Kombinace úkolů pro "vyhrej"
             
-        case RIGHT_BLUDISTE:
-            rkLedYellow(true); // Žlutá pro bludiště
+            //Provedení Sprintu
+            sprint_m_d(); 
+
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
+            
+            //Čekání na červeném poli 10s
             delay(DelayOnRed);
+
+            //Provedení slalomu
+            slalom(true); 
+
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+            
+            //Provedení Bludiště
             bludiste();
+
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
+
+                //Otočení LEFT mezi Bludištěm a Medvědem
+                turn_on_spot_left(90, 50);
+                    delay(100);
+                back_buttons(40);
+                    delay(100);
+                forward_acc(od_steny_na_stred_pole, 50);
+            
+            // //Čekání na červeném poli 10s
+            // delay(DelayOnRed);
+            
+            // //Provedení Medvěda
+            // medved();
+
+            // //Čekání na červeném poli 10s
+            // delay(DelayOnRed);
+
+            // //Provedení Kuliček
+            // kulicky();
+
+
+            break;
+
+        case OFF_MEDVED:        //Provede MEDVEDA
+
+                // Červená pro Medvěda
+                rkLedRed(true);
+            
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
+            //Provedení Medvěda
+            medved();
+
+
+            break;
+
+        case DOWN_KULICKY:      //Provede KULIČKY
+
+                // Modrá pro Kuličky
+                rkLedBlue(true);  
+                
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
+            //Provedení Kuliček
+            kulicky();
+
+
             break;
             
-        case LEFT_SLALOM:
-            rkLedRed(true);
-            rkLedYellow(true); // Oranžová pro slalom
+        case RIGHT_BLUDISTE:    //Provede BLUDIŠTĚ
+
+                // Žlutá pro Bludiště
+                rkLedYellow(true);
+
+            //Čekání na červeném poli 10s
             delay(DelayOnRed);
+
+            //Provedení Bludiště
+            bludiste();
+
+
+            break;
+            
+        case LEFT_SLALOM:       //Provede SLALOM
+
+                // Oranžová (Červená + Žlutá) pro Slalom
+                rkLedRed(true);
+                rkLedYellow(true);
+            
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
+            //Provedení Slalomu
             slalom(true);
             
+
             break;
             
-        case ON_SPRINT:
-            rkLedBlue(true);
-            rkLedRed(true); // Fialová pro sprint
+        case ON_SPRINT:         //Provede SPRINT
+
+                // Fialová (Modrá + Červená) pro Sprint
+                rkLedBlue(true);
+                rkLedRed(true);  
+                
+            //Čekání na červeném poli 10s
             delay(DelayOnRed);
+
+            //Provedení Sprintu
             sprint_m_d();        
 
+
             break;
             
-        case BUTTON1_KOMBINACE1:
-            rkLedGreen(true);
-            rkLedYellow(true); // Zeleno-žlutá pro kombinaci 1
+        case BUTTON1_KOMBINACE1:    //Provede 1. KOMBINACI
+
+                // Zeleno-žlutá pro kombinaci 1
+                rkLedGreen(true);
+                rkLedYellow(true); 
+                
+            //Čekání na červeném poli 10s
             delay(DelayOnRed);
+
+            //Provedení     První   disciplíny z 1. kombinace
+            slalom(false);
+
+            //Provedení     Druhé   disciplíny z 1. kombinace
+
+            //Provedení     Třetí   disciplíny z 1. kombinace
+
+            //Provedení     Čtvrté  disciplíny z 1. kombinace
+
+            //Provedení     Páté    disciplíny z 1. kombinace
 
             
             break;
             
-        case BUTTON2_KOMBINACE2:
-            rkLedRed(true);
-            rkLedGreen(true);
-            rkLedBlue(true);
-            rkLedYellow(true); // Bílá (všechny barvy) pro kombinaci 2
+        case BUTTON2_KOMBINACE2:    //Provede 2. KOMBINACI
+
+                // Bílá (všechny barvy) pro kombinaci 2
+                rkLedRed(true);
+                rkLedGreen(true);
+                rkLedBlue(true);
+                rkLedYellow(true);
+            
+            //Čekání na červeném poli 10s   
             delay(DelayOnRed);
 
-            
+            //Provedení     První   disciplíny z 2. kombinace
+
+            //Provedení     Druhé   disciplíny z 2. kombinace
+
+            //Provedení     Třetí   disciplíny z 2. kombinace
+
+            //Provedení     Čtvrté  disciplíny z 2. kombinace
+
+            //Provedení     Páté    disciplíny z 2. kombinace
+
+
             break;
         
-        case NONE:
+        case NONE:  //Nic se neprovádí
             break;
     }
     delay(100);

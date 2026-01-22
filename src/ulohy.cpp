@@ -71,7 +71,7 @@ void sprint_m_d(){
 
     // Nastavení P-regulátoru a rychlosti
     const int base_speed = 60; // Základní rychlost
-    const float Kp = 0.5;      // Proporční konstanta (laditelná hodnota)
+    const float Kp = 0.3;      // Proporční konstanta (laditelná hodnota)
 
     int rychlost_levy_motor = base_speed;
     int rychlost_pravy_motor = base_speed;
@@ -88,10 +88,15 @@ void sprint_m_d(){
         //Měření vzdálenosti k pravé stěně během jízdy
         int current_distance_right = rkUltraMeasure(2);
 
-        if(current_distance_right < 200 && current_distance_right> 10 && (current_distance_right - first_distance_right < 0)){
+        int error_right = current_distance_right - first_distance_right;
 
-            // Výpočet chyby
-            int error_right = current_distance_right - first_distance_right;
+        int distance_vpredu = rkUltraMeasure(1);
+
+        if((current_distance_right > 200) || (current_distance_right == 0) || ((distance_vpredu < 700) && (distance_vpredu > 200))){
+            rychlost_levy_motor = base_speed;
+            rychlost_pravy_motor = base_speed;
+        }
+        else if(abs(error_right) > 5){
 
             // Výpočet korekce
             int correction = Kp * error_right;
@@ -99,17 +104,6 @@ void sprint_m_d(){
             // Úprava rychlosti motorů
             rychlost_levy_motor = base_speed + correction;
             rychlost_pravy_motor = base_speed - correction;
-        }
-        else if(current_distance_right < 200 && current_distance_right> 10 && (current_distance_right - first_distance_right > 0)){
-            // Výpočet chyby
-            int error_left = abs(current_distance_right - first_distance_right);
-
-            // Výpočet korekce
-            int correction = Kp * error_left;
-
-            // Úprava rychlosti motorů
-            rychlost_levy_motor = base_speed - correction;
-            rychlost_pravy_motor = base_speed + correction;
         }
         else{
             rychlost_levy_motor = base_speed;
@@ -136,32 +130,63 @@ void sprint_m_d(){
 }
 
 void slalom(bool right){
-    forward_acc(od_steny_na_stred_pole, 60);
-    radius_right(150, 90, 50);
-    delay(100);
-    radius_left(150, 180, 50);
-    delay(100);
-    radius_right(150, 180, 50);
-    delay(100);
+    if(right){
 
-    //Srovnani pred vjetim do cile
-    back_buttons(30);
-    delay(100);
-    forward_acc(od_steny_na_stred_pole, 60);
-    delay(100);
-    turn_on_spot_right(90, 50);
-    delay(100);
-    back_buttons(30);
-    delay(100);
-    forward_acc(od_steny_na_stred_pole, 60);
-    delay(100);
-    turn_on_spot_left(90, 50);
-    delay(100);
-    back_buttons(30);
-    delay(100);
-    forward_acc(jedno_pole + od_steny_na_stred_pole, 60);
-    delay(100);
+        //Radiusy kopírují čáru
+        forward_acc(od_steny_na_stred_pole, 60);
+        radius_right(100, 90, 50);
+        delay(100);
+        radius_left(90, 180, 50);
+        delay(100);
+        radius_right(90, 180, 50);
+        delay(100);
 
+        //Srovnani pred vjetim do cile
+        back_buttons(30);
+        delay(100);
+        forward_acc(od_steny_na_stred_pole, 60);
+        delay(100);
+        turn_on_spot_right(90, 50);
+        delay(100);
+        back_buttons(30);
+        delay(100);
+        forward_acc(od_steny_na_stred_pole, 60);
+        delay(100);
+        turn_on_spot_left(90, 50);
+        delay(100);
+        forward_acc(jedno_pole, 60);
+        delay(100);
+    } else{
+
+        //Rádiusy koúírují čáru
+        forward_acc(od_steny_na_stred_pole + 40, 60);
+        radius_left(80, 180, 50);
+        delay(100);
+        radius_right(80, 180, 50);
+        delay(100);
+        radius_left(90, 90, 50);
+        delay(100);
+
+        // //Srovnani před vjetím do cíle
+        // back_buttons(30);
+        // delay(100);
+        // forward_acc(od_steny_na_stred_pole, 60);
+        // delay(100);
+        // turn_on_spot_right(90, 50);
+        // delay(100);
+        // back_buttons(30);
+        // delay(100);
+        // forward_acc(od_steny_na_stred_pole, 60);
+        // delay(100);
+        // turn_on_spot_left(90, 50);
+        // delay(100);
+        // forward_acc(jedno_pole + od_steny_na_stred_pole, 60);
+        // delay(100);
+        // turn_on_spot_left(90, 50);
+        // delay(100);
+        forward_acc(od_steny_na_stred_pole, 60);
+        delay(100);
+    }
 
     // forward_acc(300,60);
     // turn_on_spot_right(90, 50);
