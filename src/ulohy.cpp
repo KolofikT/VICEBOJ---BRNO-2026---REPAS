@@ -132,6 +132,8 @@ void sprint_m_d(){
 }
 
 //SLALOM
+//  SLALOM  --  true    --> první radius RIGHT
+//  SLALOM  --  false   --> první radius LEFT
 void slalom(bool right){
     if(right){
 

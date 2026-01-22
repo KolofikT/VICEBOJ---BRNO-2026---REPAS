@@ -7,6 +7,8 @@
 //  Nastavit správně VYHREJ kombinaci.
 //  Nastavit Kombinaci_1 a Kombinaci_2. Ideálně po disciplínách, které jsou problémové a mohly by se opakovaně kazit.
 //  Otestova všechny disciplíny, alespoň samostatně, případně upravit/optimalizovat code. 
+//  SLALOM  --  true    --> první radius RIGHT
+//  SLALOM  --  false   --> první radius LEFT
 
 //Nastavení pinů pro tlačítka
 byte Bbutton1 = 35;
@@ -214,6 +216,8 @@ void loop() {
             break;
             
         case LEFT_SLALOM:       //Provede SLALOM
+                                //  SLALOM  --  true    --> první radius RIGHT
+                                //  SLALOM  --  false   --> první radius LEFT
 
                 // Oranžová (Červená + Žlutá) pro Slalom
                 rkLedRed(true);
@@ -222,8 +226,11 @@ void loop() {
             //Čekání na červeném poli 10s
             delay(DelayOnRed);
 
-            //Provedení Slalomu
+            //Provedení Slalomu - RIGHT
             slalom(true);
+
+            // //Provedení Slalomu - LEFT
+            // slalom(false);
             
 
             break;
