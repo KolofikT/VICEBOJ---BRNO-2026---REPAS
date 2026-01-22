@@ -3,13 +3,20 @@
 #include <Wire.h>
 #include <Adafruit_VL53L0X.h>
 
+//  Zkontrolovat zda je správně nastaven DelayOnRed (čekání mezi disciplínama --> 10s == (10000)ms).
+//  Nastavit správně VYHREJ kombinaci.
+//  Nastavit Kombinaci_1 a Kombinaci_2. Ideálně po disciplínách, které jsou problémové a mohly by se opakovaně kazit.
+//  Otestova všechny disciplíny, alespoň samostatně, případně upravit/optimalizovat code. 
 
-byte Bbutton1 = 27;
-byte Bbutton2 = 35;
- 
+//Nastavení pinů pro tlačítka
+byte Bbutton1 = 35;
+byte Bbutton2 = 27;
+
+//  Čekání na červeném poli (v ms)    --> MUSÍ BÝT 10s (10000)
+//  Pro testy je nastaveno na 1s (1000)
 int DelayOnRed = 1000;
 
-// deklarace instance senzoru
+// Deklarace instance senzoru
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_1X);
 
@@ -19,15 +26,20 @@ void trap() {
     while (1)
         ;
 }
+
+//Vypíše stav baterie
 void test_batery(){
     printf("batery percent: %u\n", rkBatteryPercent());
     printf("batery voltage: %u\n", rkBatteryVoltageMv()/1000);
 }
+
+//Nastavení
 void configurating(){
     Serial.begin(115200);
     rkConfig cfg;
     rkSetup(cfg);
 
+    //Nastavení RGB senzoru
     pinMode(21, PULLUP);
     pinMode(22, PULLUP);
     // Spust I2C sbernice
@@ -35,10 +47,10 @@ void configurating(){
     delay(100);
     Wire.setTimeOut(1);
 
-    // Initialize the color sensor with a unique name and the I2C bus
+    // Initialize RGB senzoru
     rkColorSensorInit("front", Wire, tcs);
 
-
+    // //Nastavení Laser senzoru (nejede)
     // pinMode(14, PULLUP);
     // pinMode(26, PULLUP);
     // // Spust I2C sbernice
@@ -50,14 +62,15 @@ void configurating(){
     // rk_laser_init("laser", Wire1, lox, 0, 0x30);
 
     printf("Starting main loop\n");
-    //start tlacitko pro kalibraci klepet
 
     rkLedBlue(false);
     rkLedGreen(false);
     rkLedYellow(false);
     rkLedRed(false);
+
     test_batery();
     
+    //Nachstání serv (klepeto - Medvěd; zhazovadlo - Kuličky) do zasunuté polohy
     zavrit_klepeto();
     zasun_zhazovadlo();
 
@@ -88,10 +101,9 @@ RobotButton getPressed() {
 }
 
 
-void setup() {
-    configurating();
-}
+void setup() { configurating(); }
 
+//Spuštění tlačítkového menu (tlačítko na danou disciplínu)
 void loop() {
     rkLedBlue(false);
     rkLedGreen(false);
@@ -144,17 +156,17 @@ void loop() {
                     delay(100);
                 forward_acc(od_steny_na_stred_pole, 50);
             
-            // //Čekání na červeném poli 10s
-            // delay(DelayOnRed);
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
             
-            // //Provedení Medvěda
-            // medved();
+            //Provedení Medvěda
+            medved();
 
-            // //Čekání na červeném poli 10s
-            // delay(DelayOnRed);
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
 
-            // //Provedení Kuliček
-            // kulicky();
+            //Provedení Kuliček
+            kulicky();
 
 
             break;
@@ -241,15 +253,31 @@ void loop() {
             delay(DelayOnRed);
 
             //Provedení     První   disciplíny z 1. kombinace
-            slalom(false);
+
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
 
             //Provedení     Druhé   disciplíny z 1. kombinace
 
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
             //Provedení     Třetí   disciplíny z 1. kombinace
+
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
 
             //Provedení     Čtvrté  disciplíny z 1. kombinace
 
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
             //Provedení     Páté    disciplíny z 1. kombinace
+
 
             
             break;
@@ -267,13 +295,30 @@ void loop() {
 
             //Provedení     První   disciplíny z 2. kombinace
 
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
             //Provedení     Druhé   disciplíny z 2. kombinace
+
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
 
             //Provedení     Třetí   disciplíny z 2. kombinace
 
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
             //Provedení     Čtvrté  disciplíny z 2. kombinace
 
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
             //Provedení     Páté    disciplíny z 2. kombinace
+
 
 
             break;
