@@ -8,7 +8,7 @@ int od_steny_na_stred_pole = jedno_pole/2 - zadek_od_stredu; // 150 - 73 = 77 mm
 
 //Ovládání serva s klepetem pro Medvěda
 void otevrit_klepeto()  { rkServosSetPosition(3, 90); }
-void zavrit_klepeto()   { rkServosSetPosition(3, -50); }
+void zavrit_klepeto()   { rkServosSetPosition(3, -30); }
 
 //Ovládání serva s ramenem pro Kuličky
 void vysun_zhazovadlo(){        //musi byt blokujici ... ceka nez dosahne stupne....
@@ -159,7 +159,9 @@ void slalom(bool right){
         delay(100);
         turn_on_spot_left(90, 50);
         delay(100);
-        forward_acc(jedno_pole, 60);
+            back_buttons(30);
+            delay(100);
+        forward_acc(jedno_pole + od_steny_na_stred_pole, 60);
         delay(100);
     } else{
 
@@ -184,7 +186,7 @@ void medved(){
     delay(100);
 
     //Na 2. pole
-    forward(430,60);
+    forward(430,40);
     delay(100);
 
     //Zatočení na 3. pole
@@ -192,26 +194,26 @@ void medved(){
     delay(100);
 
     //Na 4. pole
-    forward(jedno_pole,70);
-    delay(10);
+    forward(jedno_pole + 50, 40);
+    delay(100);
 
     //Vycouvání a jetí do cíle
     back_buttons(30);
     delay(10);
     zavrit_klepeto();
     delay(10);
-    forward_acc(od_steny_na_stred_pole, 70);
+    forward_acc(od_steny_na_stred_pole, 40);
     delay(100);
-    turn_on_spot_right(90, 50);
+    turn_on_spot_right(90, 40);
     delay(10);
     back_buttons(30);
     delay(10);
-    forward_acc(jedno_pole + od_steny_na_stred_pole, 70); // 345
+    forward_acc(jedno_pole + od_steny_na_stred_pole, 40); // 345
     delay(10);
-    turn_on_spot_left(90, 50);
+    turn_on_spot_left(90, 40);
     back_buttons(30);
     delay(10);
-    forward_acc(jedno_pole + od_steny_na_stred_pole, 70);
+    forward_acc(jedno_pole + od_steny_na_stred_pole, 40);
     delay(10);
 }
 
@@ -220,7 +222,7 @@ void kulicky(){
     int cekani = 1500;
 
     //Na pozici první kuličky
-    forward_acc(30,30);
+    forward_acc(60, 30);
     vysun_zhazovadlo();
     delay(cekani);
     zasun_zhazovadlo();
@@ -257,7 +259,7 @@ void bludiste(){
     //Provádí na začátku, aby se nomohl omylem vrátit zpět na startu
     for(int i=0; i< 5; i++){
         if(is_free_right()){                // v pravo je volno
-            turn_on_spot_right(90, 50);
+            turn_on_spot_right(90, 40);
             delay(10);
             forward_acc(jedno_pole,40);
             delay(10);
@@ -267,10 +269,10 @@ void bludiste(){
             delay(10);
         }
         else{                               // volno v levo/v zadu         
-            turn_on_spot_left(90, 50);
+            turn_on_spot_left(90, 40);
             if(is_free_front()){            // v levo je volno
                 srovnani(); 
-                turn_on_spot_right(90, 50); 
+                turn_on_spot_right(90, 40); 
             }
             else{                           // v zadu je volno --> musíme couvat
                 rkLedBlue(true);
@@ -287,19 +289,29 @@ void bludiste(){
         rkBuzzerSet(false);
         delay(100);
         if(is_free_right()){                // v pravo je volno
-            turn_on_spot_right(90, 50);
+            turn_on_spot_right(90, 40);
             delay(100);
             forward_acc(jedno_pole,40);
         }
-        else if(is_free_front()){           // ve predu je volno
+        else if(is_free_front()){ 
+            
+            //Rovnání se o pravou stěnu
+            turn_on_spot_left(90, 40);
+            back_buttons(30);
+            delay(100);
+            forward_acc(od_steny_na_stred_pole, 40);
+            delay(100);
+            turn_on_spot_right(90, 40);
+
+            // ve predu je volno
             forward_acc(jedno_pole,40);
             delay(100);
         }
         else{                               // volno v levo/v zadu     
-            turn_on_spot_left(90, 50);
+            turn_on_spot_left(90, 40);
             if(is_free_front()){            // v levo je volno
                 srovnani(); 
-                turn_on_spot_right(90, 50); 
+                turn_on_spot_right(90, 40); 
             }
             else{ srovnani(); }             // v zadu je volno --> musíme couvat
         }

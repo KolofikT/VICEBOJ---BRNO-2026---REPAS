@@ -16,7 +16,7 @@ byte Bbutton2 = 27;
 
 //  Čekání na červeném poli (v ms)    --> MUSÍ BÝT 10s (10000)
 //  Pro testy je nastaveno na 1s (1000)
-int DelayOnRed = 1000;
+int DelayOnRed = 10000;
 
 // Deklarace instance senzoru
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
@@ -62,6 +62,13 @@ void configurating(){
     
     // //Inicializuj senzor
     // rk_laser_init("laser", Wire1, lox, 0, 0x30);
+
+    // while(true){
+    //     int distance_F = rkUltraMeasure(1);
+    //     int distance_L = rkUltraMeasure(2);
+    //     Serial.printf("Ultrasonic distance: %d mm\n", distance_F); // vzdalenost je v mm !!!!!
+    //     Serial.printf("Ultrasonic distance: %d mm\n", distance_L); // vzdalenost je v mm !!!!!
+    // }
 
     printf("Starting main loop\n");
 
@@ -120,6 +127,9 @@ void loop() {
                 delay(DelayOnRed);
 
         // Kombinace úkolů pro "vyhrej"
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
             
             //Provedení Sprintu
             sprint_m_d(); 
@@ -170,6 +180,11 @@ void loop() {
             //Provedení Kuliček
             kulicky();
 
+            //Oznámení KONCE
+            rkBuzzerSet(true);
+            delay(2000);
+            rkBuzzerSet(false);
+            
 
             break;
 
@@ -235,17 +250,65 @@ void loop() {
 
             break;
             
-        case ON_SPRINT:         //Provede SPRINT
+        case ON_SPRINT:        //Provádí Kombinaci po sprintu //Provede SPRINT
 
                 // Fialová (Modrá + Červená) pro Sprint
                 rkLedBlue(true);
                 rkLedRed(true);  
                 
+            // //Čekání na červeném poli 10s
+            // delay(DelayOnRed);
+
+            // //Provedení Sprintu
+            // sprint_m_d();      
+            
+        //Kombinace po sprintu: Slalom -> Bludiště -> Medvěd -> Kuličky
+
             //Čekání na červeném poli 10s
             delay(DelayOnRed);
 
-            //Provedení Sprintu
-            sprint_m_d();        
+            //Provedení slalomu
+            slalom(true); 
+
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+            
+            //Provedení Bludiště
+            bludiste();
+
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
+
+                //Otočení LEFT mezi Bludištěm a Medvědem
+                turn_on_spot_left(90, 50);
+                    delay(100);
+                back_buttons(40);
+                    delay(100);
+                forward_acc(od_steny_na_stred_pole, 50);
+            
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+            
+            //Provedení Medvěda
+            medved();
+
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+
+            //Provedení Kuliček
+            kulicky();
+
+            //Oznámení KONCE
+            rkBuzzerSet(true);
+            delay(2000);
+            rkBuzzerSet(false);
 
 
             break;
@@ -258,33 +321,38 @@ void loop() {
                 
             //Čekání na červeném poli 10s
             delay(DelayOnRed);
+            
+            //Provedení Bludiště
+            bludiste();
 
-            //Provedení     První   disciplíny z 1. kombinace
+                //Ohlášení dokončení disciplíny
+                rkBuzzerSet(true);
+                delay(200);
+                rkBuzzerSet(false);
 
+                //Otočení LEFT mezi Bludištěm a Medvědem
+                turn_on_spot_left(90, 50);
+                    delay(100);
+                back_buttons(40);
+                    delay(100);
+                forward_acc(od_steny_na_stred_pole, 50);
+            
+            //Čekání na červeném poli 10s
+            delay(DelayOnRed);
+            
+            //Provedení Medvěda
+            medved();
 
             //Čekání na červeném poli 10s
             delay(DelayOnRed);
 
-            //Provedení     Druhé   disciplíny z 1. kombinace
+            //Provedení Kuliček
+            kulicky();
 
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Třetí   disciplíny z 1. kombinace
-
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Čtvrté  disciplíny z 1. kombinace
-
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Páté    disciplíny z 1. kombinace
-
+            //Oznámení KONCE
+            rkBuzzerSet(true);
+            delay(2000);
+            rkBuzzerSet(false);
 
             
             break;
@@ -297,35 +365,22 @@ void loop() {
                 rkLedBlue(true);
                 rkLedYellow(true);
             
-            //Čekání na červeném poli 10s   
+            //Čekání na červeném poli 10s
             delay(DelayOnRed);
-
-            //Provedení     První   disciplíny z 2. kombinace
-
+            
+            //Provedení Medvěda
+            medved();
 
             //Čekání na červeném poli 10s
             delay(DelayOnRed);
 
-            //Provedení     Druhé   disciplíny z 2. kombinace
+            //Provedení Kuliček
+            kulicky();
 
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Třetí   disciplíny z 2. kombinace
-
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Čtvrté  disciplíny z 2. kombinace
-
-
-            //Čekání na červeném poli 10s
-            delay(DelayOnRed);
-
-            //Provedení     Páté    disciplíny z 2. kombinace
-
+            //Oznámení KONCE
+            rkBuzzerSet(true);
+            delay(2000);
+            rkBuzzerSet(false);
 
 
             break;

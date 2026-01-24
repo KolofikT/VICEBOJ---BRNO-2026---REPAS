@@ -10,7 +10,7 @@ Hlavní změnou je knihovna a styl jízdy.
 
 1) Vložte baterii.
 2) Zmáčkněte tlačítko „**ON**“ (rozsvítí se 2 červené LEDky na desce -> deska je zapnutá).
-3) Zkontrolujte, zda se klepeto a rameno posunuly do výchozí polohy.
+3) Zkontrolujte, zda se klepeto a rameno posunula do výchozí polohy.
 4) Zmáčkněte „**RESET**“.
 5) Spusťte některý z programů (B1, B2, B3, B4, ON, OFF, TL1, TL2). Pokud se rozsvítí LEDky / robot se začne pohybovat -> ROBOT JE PŘIPRAVEN K JÍZDĚ.
 6) Vložte robota na start soutěže a spusťte „**B1 - VYHREJ**“.
@@ -23,6 +23,8 @@ Hlavní změnou je knihovna a styl jízdy.
 !["Ovládací tlačítka"](/photo/BRNO-VICEBOJ-2026-REPAS-BUTTONS_SETUP.JPG)
 
 **B1 - VYHREJ**
+    - Projede všechny disciplíny, tak jak jsou za sebou.
+    - Sprint -> Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
 
 **B2 - KULIČKY**
 
@@ -31,19 +33,25 @@ Hlavní změnou je knihovna a styl jízdy.
 **B4 - BLUDIŠTĚ**
 
 **ON - SPRINT**
+    - Provede Kombinaci 0 (vše po Sprintu):
+    - Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
 
 **OFF - MEDVĚD**    
 
 **TL1 - KOMBINACE 1**
+    - Provede Kombinaci 1 (vše po Slalomu):
+    - Bludiště -> Medvěd -> Kuličky --> Cíl
 
 **TL2 - KOMBINACE 2**
+    - Provede Kombinaci 2 (vše po Bludišti):
+    - Medvěd -> Kuličky --> Cíl
 
 
 ## SOUTĚŽE:
 
 ### B1 - VYHREJ:
 - Rozsvítí zelenou LEDku.
-- Projede všechny soutěže, tak, jak jsou za sebou. Po dokončení každé z disciplín (stojí na červené ploše) vydá tón a poté čeká 10 s. 
+- Projede všechny disciplíny, tak jak jsou za sebou. Po dokončení každé z disciplín (stojí na červené ploše) vydá tón a poté čeká 10 s. 
 
 ### B2 - KULIČKY:
 - Rozsvítí modrou LEDku.
@@ -51,7 +59,7 @@ Hlavní změnou je knihovna a styl jízdy.
 - Popojede vpřed a shodí míček (3x), poté couvne, otočí se, srovná o zeď a jede do cíle.
 
 ### B3 - SLALOM:
-- Rozsvítí červenou a žlutou (oranžová) LEDku.
+- Rozsvítí červenou a žlutou (oranžovou) LEDku.
 - Čeká 10 s.
 - Může začínat ze dvou směrů (nastavuje se v kódu).
 - Projede slalom tím, že jede přesné obloučky.
@@ -80,12 +88,16 @@ slalom(false);
 - Pro další kontroly vždy nejprve kontroluje, zda vidí cíl (červenou barvu).
 
 ### ON - SPRINT:
-- Rozsvítí červenou a modrou (fialová) LEDku.
+- Rozsvítí červenou a modrou (fialovou) LEDku.
 - Čeká 10 s.
-- Změří vzdálenost od pravé zdi.
-- Změří vzdálenost před sebou a jede tuto vzdálenost.
-- Během jízdy měří aktuální vzdálenost od pravé zdi a podle toho upravuje kurz.
-- Po zastavení se srovná v rohu a otočí se na pravou stranu od původní jízdy.
+- Provádí nastavenou kombinaci disciplín po dokončení Sprintu.
+- Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
+
+- **SPRINT**
+    - Změří vzdálenost od pravé zdi.
+    - Změří vzdálenost před sebou a jede tuto vzdálenost.
+    - Během jízdy měří aktuální vzdálenost od pravé zdi a podle toho upravuje kurz.
+    - Po zastavení se srovná v rohu a otočí se na pravou stranu od původní jízdy.
 
 ### OFF - MEDVĚD:
 - Rozsvítí červenou LEDku.
@@ -96,17 +108,20 @@ slalom(false);
 ### TL1 - KOMBINACE 1:
 - Rozsvítí zelenou a žlutou LEDku.
 - Čeká 10 s.
-- Provádí nastavenou kombinaci disciplín.
+- Provádí nastavenou kombinaci disciplín po dokončení Slalomu.
+- Bludiště -> Medvěd -> Kuličky --> Cíl
 
 ### TL2 - KOMBINACE 2:
 - Rozsvítí červenou, zelenou, modrou a žlutou (všechny barvy) LEDku.
 - Čeká 10 s.
-- Provádí nastavenou kombinaci disciplín.
+- Provádí nastavenou kombinaci disciplín po dokončení Bludiště.
+- Medvěd -> Kuličky --> Cíl
 
 
 ## KONTROLA KÓDU PŘED SOUTĚŽÍ:
 
 1) Zkontrolovat, zda je správně nastaven **DelayOnRed** (čekání mezi disciplínami --> 10 s == (10000) ms).
-2) Nastavit správně VYHREJ kombinaci.
-3) Nastavit Kombinaci_1 a Kombinaci_2. Ideálně po disciplínách, které jsou problémové a mohly by se opakovaně kazit.
+2) Nastavit správně všechny kombinace, včetně otáčení mezi nimi pokud je potřeba.
+3) Nastavit SPRINT (Kombinaci_0), Kombinaci_1 a Kombinaci_2. Ideálně po disciplínách, které jsou problémové a mohly by se opakovaně kazit.
 4) Otestovat všechny disciplíny, alespoň samostatně, případně upravit/optimalizovat kód. 
+5) Kontrolujte, zda se neobjevují náhlé chyby.

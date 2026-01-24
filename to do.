@@ -2,6 +2,30 @@
 
 VÍCEBOJ - BRNO 2026 -> REPAS Z ,,BRNO 2025,,
 
+Letos zhazovadlo fungovalo lépe.
+Příčinou bude výška, ze které se zhazovadlo spouštělo (letos byla vyšší).
+ 
+
+Medvěd:
+    - Občas medvěd spadne a lehce projede pod klepetem.
+        --> Prodloužení klepeta + zakřivení směrem dolů.
+            => Větší díra pro klepeto v přední desce + klepeto se nebude zavírat úplně dovnitř.
+
+Chyby:
+    - Asi po třetím zapnutí na soutěžním hřišti se při rozjetí v před rozjelo pouze jedno kolo.
+        --> Příčinou by mohlo být tření kartáčků po desce a společnš s kovovým rámem vytvoření statického náboje, nebo uvolnění některého z kabelů.
+
+Úpravy pro příští rok:
+    - Medvěd klepeto.
+    - Přidání modulu na sledování čáry (může být použito pro Sprint i Slalom).
+    - Přidání ultrazvuku na levou stranu.
+    - Přidat lasery na obě strany v zadu (musí se otestovat funkčnost, zda nechytají kolo) a udělat pro ně otvory do bočních stěn.
+    
+    - Zhazovadlo udělat jako lineární posuv na obě strany.
+    - Zkontrolovat velikost STOP tlačítka a zda se, při velkých nárazech vzad, samovolně nemačká svojí velikostí/váhou. 
+    
+-------------------------------------------------------------------------------------
+
 SOUTĚŽE:        STAV:
 
 Sprint      - DONE
@@ -12,4 +36,4 @@ Kuličky     - DONE
 
 Návaznost:
 
-SPRINT --> SLALOM --> BLUDIŠTĚ  -   DONE
+SPRINT --> SLALOM --> BLUDIŠTĚ --> Medvěd --> Kuličky -   DONE
