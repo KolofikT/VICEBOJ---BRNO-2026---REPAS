@@ -52,16 +52,16 @@ Původní robot z roku 2025: https://github.com/ZemanNz/RBCX-ROBOT-BRNO-2025
 
 ## SOUTĚŽE:
 
-### B1 - VYHREJ:
+### VYHREJ:
 - Rozsvítí zelenou LEDku.
 - Projede všechny disciplíny, tak jak jsou za sebou. Po dokončení každé z disciplín (stojí na červené ploše) vydá tón a poté čeká 10 s. 
 
-### B2 - KULIČKY:
+### KULIČKY:
 - Rozsvítí modrou LEDku.
 - Čeká 10 s a poté provede disciplínu.
 - Popojede vpřed a shodí míček (3x), poté couvne, otočí se, srovná o zeď a jede do cíle.
 
-### B3 - SLALOM:
+### SLALOM:
 - Rozsvítí červenou a žlutou (oranžovou) LEDku.
 - Čeká 10 s.
 - Může začínat ze dvou směrů (nastavuje se v kódu).
@@ -107,7 +107,7 @@ slalom(false);
 
 ## Návaznosti:
 
-### SPRINT (Kombinace 0):
+### KOMBINACE 0 (SPRINT):
 - Rozsvítí zelenou a žlutou LEDku.
 - Čeká 10 s.
 - Provádí nastavenou kombinaci disciplín po dokončení Sprintu.
