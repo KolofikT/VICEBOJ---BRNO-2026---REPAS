@@ -82,7 +82,7 @@ slalom(false);
 
 ===> Slalom začíná zatáčením na levou stranu.
 
-### B4 - BLUDIŠTĚ:
+### BLUDIŠTĚ:
 - Rozsvítí žlutou LEDku.
 - Čeká 10 s.
 - Jede vpřed a kontroluje, kam může jet dle priority (pravá, rovně, levá, zpět).
@@ -90,31 +90,36 @@ slalom(false);
 - Pro prvních 5 kontrol nekontroluje, zda je již v cíli, ale má lehce odlišný kód, aby robot omylem nenajel zpět do startu.
 - Pro další kontroly vždy nejprve kontroluje, zda vidí cíl (červenou barvu).
 
-### ON - SPRINT:
+### SPRINT:
 - Rozsvítí červenou a modrou (fialovou) LEDku.
 - Čeká 10 s.
-- Provádí nastavenou kombinaci disciplín po dokončení Sprintu.
-- Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
+- Změří vzdálenost od pravé zdi.
+- Změří vzdálenost před sebou a jede tuto vzdálenost.
+- Během jízdy měří aktuální vzdálenost od pravé zdi a podle toho upravuje kurz.
+- Po zastavení se srovná v rohu a otočí se na pravou stranu od původní jízdy.
 
-- **SPRINT**
-    - Změří vzdálenost od pravé zdi.
-    - Změří vzdálenost před sebou a jede tuto vzdálenost.
-    - Během jízdy měří aktuální vzdálenost od pravé zdi a podle toho upravuje kurz.
-    - Po zastavení se srovná v rohu a otočí se na pravou stranu od původní jízdy.
-
-### OFF - MEDVĚD:
+### MEDVĚD:
 - Rozsvítí červenou LEDku.
 - Čeká 10 s.
 - Otevře klepeto, tlačí medvěda a jede vzdálenost 2 polí, poté zatáčí na pravou stranu a pokračuje vpřed až na poslední pole.
 - Po odtlačení medvěda couvá a rovná se v rohu, poté jede do cíle.
 
-### TL1 - KOMBINACE 1:
+
+## Návaznosti:
+
+### SPRINT (Kombinace 0):
+- Rozsvítí zelenou a žlutou LEDku.
+- Čeká 10 s.
+- Provádí nastavenou kombinaci disciplín po dokončení Sprintu.
+- Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
+
+### KOMBINACE 1:
 - Rozsvítí zelenou a žlutou LEDku.
 - Čeká 10 s.
 - Provádí nastavenou kombinaci disciplín po dokončení Slalomu.
 - Bludiště -> Medvěd -> Kuličky --> Cíl
 
-### TL2 - KOMBINACE 2:
+### KOMBINACE 2:
 - Rozsvítí červenou, zelenou, modrou a žlutou (všechny barvy) LEDku.
 - Čeká 10 s.
 - Provádí nastavenou kombinaci disciplín po dokončení Bludiště.
