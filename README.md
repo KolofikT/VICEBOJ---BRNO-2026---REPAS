@@ -1,7 +1,10 @@
 # RBCX-BRNO-2026-VICEBOJ-REPAS
 
-Opět uveden do provozu z loňského roku (2025).
-Hlavní změnou je knihovna a styl jízdy.
+- Opět uveden do provozu z loňského roku (2025).
+
+Původní robot z roku 2025: https://github.com/ZemanNz/RBCX-ROBOT-BRNO-2025
+
+- Hlavní změnou je knihovna a styl jízdy.
 
 ![Robot](/photo/BRNO-VICEBOJ-2026-REPAS-FOTO.jpg)
 
