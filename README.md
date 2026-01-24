@@ -26,6 +26,7 @@ Původní robot z roku 2025: https://github.com/ZemanNz/RBCX-ROBOT-BRNO-2025
 !["Ovládací tlačítka"](/photo/BRNO-VICEBOJ-2026-REPAS-BUTTONS_SETUP.JPG)
 
 **B1 - VYHREJ**
+
     - Projede všechny disciplíny, tak jak jsou za sebou.
     - Sprint -> Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
 
@@ -36,16 +37,19 @@ Původní robot z roku 2025: https://github.com/ZemanNz/RBCX-ROBOT-BRNO-2025
 **B4 - BLUDIŠTĚ**
 
 **ON - SPRINT**
+
     - Provede Kombinaci 0 (vše po Sprintu):
     - Slalom -> Bludiště -> Medvěd -> Kuličky --> Cíl
 
 **OFF - MEDVĚD**    
 
 **TL1 - KOMBINACE 1**
+
     - Provede Kombinaci 1 (vše po Slalomu):
     - Bludiště -> Medvěd -> Kuličky --> Cíl
 
 **TL2 - KOMBINACE 2**
+
     - Provede Kombinaci 2 (vše po Bludišti):
     - Medvěd -> Kuličky --> Cíl
 
